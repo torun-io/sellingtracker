@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lucky Penny - New Item</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+</head>
+<body>
+	<div id="container">
+		<form action="/products/<%= id %>" method="post">
+			<label for="name">Item Name (Short): 
+				<input id="name" type="text" name="name" value="<%= name %>" />
+			</label>
+			<label for="title">Item Name (Full):
+				<input id="title" type="text" name="title" value="<%= title %>" />
+			</label>
+			<label for="price">Item Price: 
+				<input id="price" type="text" name="currentPrice" value="<%= currentPrice %>"/>
+			</label>
+			<label for="description">Item Description: 
+				<textarea id="description" name="description" ><%= description %></textarea>
+				<!-- <textarea id="description" name="description" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'><%= description %></textarea> -->
+				<!-- <input id="description" type="textarea" name="description" value="<%= description %>" /> -->
+			</label>
+			<label for="listedPlatforms">Platforms Listed: 
+				<ul>
+					<li>
+						<input type="checkbox" name="listedPlatforms[offerUp]" value=true <%= listedPlatforms.offerUp ? 'checked' : '' %> />OfferUp
+					</li>
+					<li>
+						<input type="checkbox" name="listedPlatforms[fiveMiles]" value=true <%= listedPlatforms.fiveMiles ? 'checked' : '' %> />5Miles
+					</li>
+					<li>
+						<input type="checkbox" name="listedPlatforms[nextDoor]" value=true <%= listedPlatforms.nextDoor ? 'checked' : '' %> />Next Door
+					</li>
+					<li>
+						<input type="checkbox" name="listedPlatforms[craigslist]" value=true <%= listedPlatforms.craigslist ? 'checked' : '' %> />Craigslist
+					</li>
+					<li>
+						<input type="checkbox" name="listedPlatforms[ebay]" value=true <%= listedPlatforms.ebay ? 'checked' : '' %> />eBay
+					</li>
+				</ul>
+			</label>
+            <label for="sold">SOLD: 
+				<input id="sold" type="checkbox" name="sold" value=true <%= sold ? 'checked' : '' %> />
+			</label>
+            <label for="soldPrice">Sold Price: 
+				<input id="soldPrice" type="text" name="soldPrice" value="<%= soldPrice %>" />
+			</label>
+			<label for="soldPlatform">Sold Through:
+				<select name="soldPlatform">
+					<option></option>
+					<option <%= soldPlatform === 'OfferUp' ? 'selected' : '' %> >OfferUp</option>
+					<option <%= soldPlatform === '5Miles' ? 'selected' : '' %> >5Miles</option>
+					<option <%= soldPlatform === 'Next Door' ? 'selected' : '' %> >Next Door</option>
+					<option <%= soldPlatform === 'Craigslist' ? 'selected' : '' %> >Craigslist</option>
+					<option <%= soldPlatform === 'eBay' ? 'selected' : '' %> >eBay</option>
+					<option <%= soldPlatform === 'Add-On Sale' ? 'selected' : '' %> >Add-On Sale</option>
+					<option <%= soldPlatform === 'Garage/Yard Sale' ? 'selected' : '' %> >Garage/Yard Sale</option>
+					<option <%= soldPlatform === 'Donated' ? 'selected' : '' %> >Donated</option>
+					<option <%= soldPlatform === 'Trashed' ? 'selected' : '' %> >Trashed</option>
+					<option <%= soldPlatform === 'Abandoned' ? 'selected' : '' %> >Abandoned</option>
+					<option <%= soldPlatform === 'Kept' ? 'selected' : '' %> >Kept</option>
+				</select>
+			</label>
+            <input type="submit" value="Update" />
+		</form>
+		<button onclick="window.location.href='/'">Go Home</button>
+	</div>
+</body>
+</html>
