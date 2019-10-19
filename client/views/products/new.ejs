@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lucky Penny - New Item</title>
+</head>
+<body>
+    <div id="container">
+        <form action="/products" method="post">
+            <label for="name">Item Name (Short):
+                <input id="name" type="text" name="name" />
+            </label>
+            <label for="title">Item Name (Full):
+                <input id="title" type="text" name="title" />
+            </label>
+            <label for="description">Item Description:
+                    <textarea id="description" name="description" ></textarea>
+                    <!-- <input id="description" type="textarea" name="description" /> -->
+                </label>
+            <label for="price">Item Price:
+                <input id="price" type="text" name="price" />
+            </label>
+            <input type="submit" value="Add" />
+        </form>
+        <button onclick="window.location.href='/'">Go Home</button>
+    </div>
+</body>
+</html>

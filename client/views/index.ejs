@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lucky Penny Selling Tracker</title>
+    <!-- <link rel="stylesheet" href="/static/css/style.css" /> -->
+    <link rel="stylesheet" type="text/css" href="/static/DataTables/datatables.min.css"/>
+    <script type="text/javascript" src="/static/DataTables/datatables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#availableItems').DataTable({
+                order: [[1, 'asc']],
+                pageLength: 50,
+                search: {
+                    search: ''
+                }
+            });
+            $('#soldItems').DataTable();
+        } );
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h2>Items Available</h2>
+        <button onclick="window.location.href='/products/new'">Add Item</button>
+        <table id="availableItems" class="stripe compact order-column cell-border" >
+            <thead>
+                <tr>
+                    <th>Thumb</th>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>OU</th>
+                    <th>5M</th>
+                    <th>ND</th>
+                    <th>CL</th>
+                    <th>EB</th>
+                    <th>Date Listed</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% products.forEach(product => { %>
+                <tr>
+                    <td><%= product.thumbnail %></td>
+                    <td><%= product.name %></td>
+                    <td class="dt-body-right"><%= product.currentPrice === 0 ? 'FREE' : product.currentPrice %></td>
+                    <td class="dt-body-center"><%= product.listedPlatforms.offerUp ? 'X' : '' %></td>
+                    <td class="dt-body-center"><%= product.listedPlatforms.fiveMiles ? 'X' : '' %></td>
+                    <td class="dt-body-center"><%= product.listedPlatforms.nextDoor ? 'X' : '' %></td>
+                    <td class="dt-body-center"><%= product.listedPlatforms.craigslist ? 'X' : '' %></td>
+                    <td class="dt-body-center"><%= product.listedPlatforms.ebay ? 'X' : '' %></td>
+                    <td><%= product.listDate.toDateString() %></td>
+                    <td><button onclick="window.location.href='/products/<%= product.id %>'">View/Edit</button></td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <hr />
+        <h2>Items Sold</h2>
+        <table id="soldItems" class="stripe compact order-column cell-border" >
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Original Price</th>
+                    <th>Sold Price</th>
+                    <th>Sold Through</th>
+                    <th>Date Listed</th>
+                    <th>Date Sold</th>
+                    <th>Days listed</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% soldProducts.forEach(product => { %>
+                <tr>
+                    <td><%= product.name %></td>
+                    <td class="dt-body-right"><%= product.originalPrice === 0 ? 'FREE' : product.originalPrice %></td>
+                    <td class="dt-body-right"><%= product.soldPrice === 0 ? 'FREE' : product.soldPrice %></td>
+                    <td class="dt-body-center"><%= product.soldPlatform %></td>
+                    <td><%= product.listDate.toDateString() %></td>
+                    <td><%= product.soldDate.toDateString() %></td>
+                    <td><%= product.soldDate - product.listDate %></td>
+                    <td><button onclick="window.location.href='/products/<%= product.id %>'">View/Edit</button></td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
