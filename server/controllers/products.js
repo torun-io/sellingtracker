@@ -8,15 +8,14 @@ module.exports = {
         let soldProducts;
         await Product.find({ sold: { $ne: true }}, (err, data) => {
             if (err) {
-                console.log(err);
+                console.log(err.message);
             }
             products = data;
             // res.render('index', { products: products });
         });
         await Product.find({ sold: true }, (err, data) => {
             if (err) {
-                console.log('still going wrongs');
-                console.log(err);
+                console.log(err.message);
             }
             soldProducts = data;
         });
@@ -40,16 +39,15 @@ module.exports = {
         });
         item.save((err) => {
             if (err) {
-                console.log('something, um, this ... went wrong', err.message)
+                console.log(err.message);
             }
             res.redirect('/');
         })
     },
     show: (req, res) => {
-        console.log('inside the show function');
         Product.findOne({ _id: req.params.id }, (err, product) => {
             if (err) {
-                console.log('error up in here: ', err);
+                console.log(err.message);
             }
             res.render('products/edit', product);
         });
@@ -60,7 +58,7 @@ module.exports = {
         };
         Product.updateOne({ _id: req.params.id }, req.body, (err) => {
             if (err) {
-                console.log('got an err: ', err);
+                console.log(err.message);
             }
             res.redirect('/');
         })
